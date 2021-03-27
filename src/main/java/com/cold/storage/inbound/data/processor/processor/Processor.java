@@ -50,23 +50,27 @@ public class Processor {
     @Autowired
     EmailService emailService;
 
-    public void runMarket() {
+    @Scheduled(fixedDelay = 15000, initialDelay = 1000)
+    public void runEoE() {
 
-        if (!(new File(marketStopFile).exists())) {
+        File eoeStopFile = new File(propertiesUtil.getEoeStopfile());
 
-            processMarketFiles();
+        if (!eoeStopFile.exists()) {
+
+            processEoeFiles();
         } else {
             log.with($ -> $.addMessage("Stop File exists ")).info(EligibilityLogStatus.PROCESSFAILURE);
-            String errorMessage = "market Stop File exists: " + marketStopFile;
-            String stopFile = marketStopFile;
-            String subject = "market Stop File exists";
+            String errorMessage = "eoe Stop File exists: " + eoeStopFile;
+            String stopFile = propertiesUtil.getEoeStopfile();
+            String subject = "eoe Stop File exists";
             emailService.generateEmailRequest(stopFile, subject, errorMessage);
         }
     }
 
-    public void processMarketFiles() {
+    public void processEoeFiles() {
         try {
-            File landingZoneDir = new File(marketInbound);
+            File landingZoneDir = new File(propertiesUtil.getEoeInbound());
+
             if (landingZoneDir.exists() && landingZoneDir.isDirectory()) {
                 File[] trigFiles = landingZoneDir.listFiles(new TrigFileFilter());
                 if (trigFiles.length > 0) {
@@ -74,33 +78,61 @@ public class Processor {
                         if (trigFile.exists()) {
                             File dataFile = service.getDataFile(trigFile);
                             if (dataFile.exists()) {
-                                service.copyFile(dataFile, marketInboundStg);
-                                service.copyFile(trigFile, marketTrigStg);
-                                service.moveFile(dataFile, marketArchive);
-                                service.moveFile(trigFile, marketArchive);
 
-                                log.with($ -> $.addMessage("Processed market File : " + dataFile
+                                File dataTempFile = dataFile;
+
+                                String fileName = dataTempFile.getName();
+
+                                if (fileName.toUpperCase().startsWith("WF1")) {
+                                    dataTempFile = Utils.renameFile(dataTempFile);
+                                }
+//                              keyPath = Utils.genFileType(dataFile, propertiesUtil.getObjectFolder());
+                                sendFileToS3(dataTempFile);
+                                service.moveFile(dataTempFile, propertiesUtil.getEoeArchive());
+                                service.moveFile(trigFile, propertiesUtil.getEoeArchive());
+                                messagingService.sendOutstreamMessage(dataTempFile.getName(), FileType.INBOUND, propertiesUtil.getObjectFolder() + dataTempFile.getName());
+
+                                log.with($ -> $.addMessage("Processed EOE File : " + dataFile
                                 )).info(EligibilityLogStatus.COMPLETED);
                             } else {
                                 log.with($ -> $.addMessage(String.format("dataFile does not exists for trig file %s moving trig to error directory", trigFile))).error(EligibilityLogStatus.PROCESSFAILURE);
                                 service.moveIncorrectFileToErrorDirectory(trigFile);
                             }
                         } else {
-                            log.with($ -> $.addMessage("market trig file no longer exists : " + trigFile.getAbsolutePath()
+                            log.with($ -> $.addMessage("EOE trig file no longer exists : " + trigFile.getAbsolutePath()
                             )).info(EligibilityLogStatus.PROCESSFAILURE);
                         }
                     }
                 }
             } else {
-                log.with($ -> $.addMessage("Market Directory no longer exists : " + marketInbound
+                log.with($ -> $.addMessage("EOE Directory no longer exists : " + propertiesUtil.getEoeInbound()
                 )).info(EligibilityLogStatus.PROCESSFAILURE);
-                String fileName = marketInbound;
-                String subject = "Market Directory no longer exists";
-                String emailMessage = "Market Directory no longer exists " + fileName + " is not available";
+                String fileName = propertiesUtil.getEoeInbound();
+                String subject = "EOE Directory no longer exists";
+                String emailMessage = "EOE Directory no longer exists " + fileName + " is not available";
                 emailService.generateEmailRequest(fileName, subject, emailMessage);
             }
+
         } catch (Exception ex) {
             log.with($ -> $.addMessage("Exception in redistribute method ")).error(EligibilityLogStatus.PROCESSFAILURE, ex);
         }
+    }
+
+    public void sendFileToS3(File file) {
+        try {
+            String fileName = file.getName();
+
+            String key = propertiesUtil.getObjectFolder() + fileName;
+
+            PutObjectRequest putObjectRequest = new PutObjectRequest(propertiesUtil.getBucketName(), key, file);
+            amazonS3Client.putObject(putObjectRequest);
+
+            log.with($ -> $.addMessage("File has been loaded to S3 Bucket: " + file
+            )).info(EligibilityLogStatus.COMPLETED);
+        } catch (Exception ex) {
+            service.moveFile(file, propertiesUtil.getEoeError());
+            log.with($ -> $.addMessage("Exception in sendFileToS3 method,file has been moved to error directory ")).error(EligibilityLogStatus.PROCESSFAILURE, ex);
+        }
+
     }
 }
