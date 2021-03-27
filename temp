@@ -1,0 +1,40 @@
+    void readAccess() throws IOException {
+        final String databasePath = "C:\\Users\\rmohan17\\Pictures\\EEMS\\coldStorage\\2021\\2021\\acc.mdb";
+        final Database database = Database.open(new File(databasePath));
+        final Set<String> allTables = database.getTableNames();
+
+        /*for (String tableName : allTables) {
+            Table table = database.getTable(tableName);
+            System.out.println("start reading data for table --> " + tableName);
+            for (Map<String, Object> row : table) {
+                //System.out.println("PARTY==> " + row.get("PARTY"));
+                System.out.println(row.values());
+            }
+        }*/
+
+        Table table = database.getTable("Amad");
+        System.out.println("start reading data for table --> " + table);
+        long count = 0;
+        List<Amad> amadList = new ArrayList<>(table.getRowCount());
+
+        for (Map<String, Object> row : table) {
+            //System.out.println("PARTY==> " + row.get("PARTY"));
+            //System.out.println(row.values());
+            Amad amad = new Amad();
+            amad.setAmadno((Integer) row.get("AMADNO"));
+            amad.setParty((String) row.get("PARTY"));
+            amad.setVill((String) row.get("VILL"));
+            amad.setMark1((String) row.get("MARK1"));
+            amad.setYear((Integer) row.get("YR"));
+            amadList.add(amad);
+            count++;
+        }
+        System.out.println("amadList --> " + amadList.toString());
+        System.out.println("count --> " + count);
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        ReadData readData = new ReadData();
+        readData.readAccess();
+    }
