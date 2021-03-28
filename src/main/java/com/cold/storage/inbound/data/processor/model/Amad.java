@@ -1,3 +1,7 @@
+package com.cold.storage.inbound.data.processor.model;
+
+import lombok.Data;
+
 @Data
 public class Amad {
     private int amadno;

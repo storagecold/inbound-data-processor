@@ -1,29 +1,11 @@
 server:
-  port: 8887
+  port: 8080
 spring:
   application:
-    name: file-reader
-  cloud:
-    stream:
-      instanceCount: 1 #The number of deployed instances of an application. Must be set for partitioning on the producer side. Must be set on the consumer side when using RabbitMQ and with Kafka if autoRebalanceEnabled=false
-      default:
-        contentType: application/json
-        group: file-reader
-        binder: kafka
-      kafka:
-        binder:
-          brokers: localhost:9092
-          auto-create-topics: false
-      bindings:
-        file-transformation:
-          destination: kaas.eligibility-eni.dev.elr.file-transformation.req
-        file-copy:
-          destination: kaas.eligibility-eni.dev.elr.fi.file-copy
-        file-ingestion-alert:
-          destination: kaas.eligibility-eni.dev.elr.file-ingestion-alert.req
-inbound: .
-marketDataFiles: Market.txt,MarketVal.txt
-archive:
+    name: inbound-data-processor
+inbound: src/test/resources/cold/inbound
+archive: src/test/resources/cold/archive
+stop: src/test/resources/stop.1
   dir:
 process:
   files: all

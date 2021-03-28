@@ -1,7 +1,8 @@
+package com.cold.storage.inbound.data.processor.service;
+
 @org.springframework.stereotype.Service
 public class EmailService {
-    private EligibilityLogger log = EligibilityLogger.getLogger(EmailService.class);
-
+/*
     @Value("${emailNotification.uri}")
     public String emailNotifUri;
 
@@ -46,5 +47,5 @@ public class EmailService {
         emailRequest.setToEmails(supportEmail);
         sendMail(emailRequest);
 
-    }
+    }*/
 }

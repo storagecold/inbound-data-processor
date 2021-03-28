@@ -1,3 +1,5 @@
+package com.cold.storage.inbound.data.processor.service;
+
 import java.io.File;
 
 public interface Service {
@@ -11,13 +13,9 @@ public interface Service {
 
     String getFileType(File file);
 
-    String getLob(File file) throws Exception;
-
-    void moveIncorrectFileToErrorDirectory(File file) ;
+    void moveIncorrectFileToErrorDirectory(File file);
 
     String getSubmitterIdFromFile(File file) throws Exception;
-
-    String getSecurityPath(String eligSysCd, String mktSegCd, String locationCd, String policyNumber);
 
     boolean moveFileToArchiveDirectory(File file);
 }

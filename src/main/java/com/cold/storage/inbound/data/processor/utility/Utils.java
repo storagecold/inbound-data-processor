@@ -1,3 +1,5 @@
+package com.cold.storage.inbound.data.processor.utility;
+
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -19,17 +21,9 @@ public class Utils {
 
         String Key = "";
 
-        if (fileName.toUpperCase().startsWith(Constants.WF1))
-            Key = Path + Constants.WF1 + Constants.FILLER + currentDate + Constants.FILLER + fileName;
-        else if (fileName.toUpperCase().startsWith(Constants.WF2))
-            Key = Path + Constants.WF2 + Constants.FILLER + currentDate + Constants.FILLER + fileName;
-        else if (fileName.toUpperCase().startsWith(Constants.HSA))
-            Key = Path + Constants.HSA + Constants.FILLER + currentDate + Constants.FILLER + fileName;
-        else if (fileName.toUpperCase().endsWith(Constants.GSF))
-            Key = Path + Constants.GSF + Constants.FILLER + currentDate + Constants.FILLER + fileName;
-        else
-            Key = Path + Constants.MnR + Constants.FILLER + currentDate + Constants.FILLER + fileName;
-
+        if (fileName.toUpperCase().startsWith(Constants.MDB)) {
+            Key = Path + Constants.MDB + Constants.FILLER + currentDate + Constants.FILLER + fileName;
+        }
         return Key;
     }
 
@@ -46,8 +40,8 @@ public class Utils {
             String currentDate = dateFormat.format(new Date());
             fileName = fileName.replace('.', ',');
             String[] holder = fileName.split(",");
-           int index = fromFilePath.lastIndexOf(holder[1]);
-           toFilePath = fromFilePath.substring(0,index) + currentDate + Constants.Dot_Ext + holder[1];
+            int index = fromFilePath.lastIndexOf(holder[1]);
+            toFilePath = fromFilePath.substring(0, index) + currentDate + Constants.DOT_TRIG_EXT + holder[1];
 
             File renamedFile = new File(toFilePath);
 
@@ -63,11 +57,9 @@ public class Utils {
         if (fileRenamed) {
             File renameFile = new File(toFilePath);
             if (renameFile.exists()) {
-
                 return renameFile;
             }
         }
         return null;
     }
-
 }

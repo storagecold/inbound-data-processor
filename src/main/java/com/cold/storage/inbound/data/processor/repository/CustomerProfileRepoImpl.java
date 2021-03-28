@@ -1,11 +1,12 @@
+package com.cold.storage.inbound.data.processor.repository;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
+/*@Component
 public class CustomerProfileRepoImpl implements CustomerProfileRepo {
-    private final EligibilityLogger log = EligibilityLogger.getLogger(CustomerProfileRepoImpl.class);
 
     private final static String PROFILE_DEFINITION_ENDPOINT = "/definition?submitterid=%s";
     private final static String PROFILE_FULL_DETAIL_ENDPOINT = "/fulldetail?submitterid=%s&profileversion=%s";
@@ -114,5 +115,5 @@ public class CustomerProfileRepoImpl implements CustomerProfileRepo {
         headers.add(EligibilityContextField.TRANS_ID, Long.toString(System.currentTimeMillis()));
         headers.add(EligibilityContextField.APP_NAME, DEST_APP_NAME);
         return headers;
-    }
-}
+    }*/
+

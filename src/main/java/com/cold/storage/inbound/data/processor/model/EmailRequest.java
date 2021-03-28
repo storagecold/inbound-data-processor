@@ -1,3 +1,5 @@
+package com.cold.storage.inbound.data.processor.model;
+
 import lombok.Data;
 
 import java.io.Serializable;

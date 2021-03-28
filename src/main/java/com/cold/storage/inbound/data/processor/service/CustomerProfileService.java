@@ -1,10 +1,11 @@
+package com.cold.storage.inbound.data.processor.service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class CustomerProfileService {
-    private final EligibilityLogger log = EligibilityLogger.getLogger(CustomerProfileService.class);
-    private CustomerProfileRepo repo;
+/*    private CustomerProfileRepo repo;
 
     @Autowired
     public CustomerProfileService(CustomerProfileRepo repo) {
@@ -23,5 +24,5 @@ public class CustomerProfileService {
         SubmitterFullDetail submitterFullDetail = repo.getSubmitterFullDetail(fileId, submitterId);
         log.with($ -> $.addMessage("Successfully retrieved submitterFullDetail for fileId:" + fileId + ", submitterId:" + submitterId)).info(EligibilityLogStatus.PROCESS);
         return submitterFullDetail;
-    }
+    }*/
 }

@@ -1,3 +1,5 @@
+package com.optum.eligibility.eoe.prevalidation.process.util;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,9 +10,8 @@ import java.util.stream.Stream;
 
 public class TestUtils {
     private final String DATA_DIR = "src/test/resources/data/";
-    private final String ELIG_DIR = "src/test/resources/elig/";
-    private final String EOE_DIR = "src/test/resources/elig/eoe/";
-    private final String EOE_ARCHIVE_DIR = "src/test/resources/elig/eoe/archive";
+    private final String COLD_INB_DIR = "src/test/resources/cold/inbound";
+    private final String COLD_ARCHIVE_DIR = "src/test/resources/cold/archive";
     private static TestUtils instance = null;
 
     private TestUtils() {
@@ -25,19 +26,10 @@ public class TestUtils {
 
     public void copyFilesToProcess() throws IOException {
 
-        //copy to eoe
-        copyFile(DATA_DIR, EOE_DIR, "EOE.E.202010141552.eoe");
-        copyFile(DATA_DIR, EOE_DIR, "EOE.E.202010141552.eoe.trig");
+        //copy
+        copyFile(DATA_DIR, COLD_INB_DIR, "lodhirajputic.202127031710.mdb");
+        copyFile(DATA_DIR, COLD_INB_DIR, "lodhirajputic.202127031710.mdb.trig");
 
-    }
-
-    public void copyFilesToClean() throws IOException {
-
-        //copy to EOE
-        copyFile(DATA_DIR, EOE_ARCHIVE_DIR , "EOE.E.202010141552.eoe");
-
-        //copy to EOE log
-        copyFile(DATA_DIR, ELIG_DIR + "eoe/logs/", "eoe.log");
     }
 
     public void copyFile(String srcDir, String destDir, String file) throws IOException {

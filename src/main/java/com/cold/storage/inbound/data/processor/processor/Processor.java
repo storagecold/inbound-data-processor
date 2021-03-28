@@ -1,75 +1,47 @@
 package com.cold.storage.inbound.data.processor.processor;
 
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.io.File;
-
-package com.optum.eligibility.lzprocess.processor;
-
-import com.optum.eligibility.core.logging.EligibilityLogStatus;
-import com.optum.eligibility.core.logging.EligibilityLogger;
-import com.optum.eligibility.lzprocess.filter.TrigFileFilter;
-import com.optum.eligibility.lzprocess.service.EmailService;
-import com.optum.eligibility.lzprocess.service.Service;
-import com.optum.eligibility.lzprocess.utility.Constants;
+import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
+import com.cold.storage.inbound.data.processor.service.Service;
+import com.cold.storage.inbound.data.processor.utility.PropertiesUtil;
+import com.cold.storage.inbound.data.processor.utility.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
-import java.io.File;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 
 @Component
 public class Processor {
-    private final EligibilityLogger log = EligibilityLogger.getLogger(MarketProcessor.class);
 
-    @Value("${marketInbound}")
-    private String marketInbound;
-
-    @Value("${eniInbStg}")
-    private String marketInboundStg;
-
-    @Value("${eniTrigStg}")
-    private String marketTrigStg;
-
-    @Value("${marketArchive}")
-    private String marketArchive;
-
-    @Value("${marketSTOP_FILE}")
-    private String marketStopFile;
+    @Autowired
+    PropertiesUtil propertiesUtil;
 
     @Autowired
     private Service service;
 
-    @Autowired
-    EmailService emailService;
+/*    @Autowired
+    EmailService emailService;*/
 
     @Scheduled(fixedDelay = 15000, initialDelay = 1000)
-    public void runEoE() {
+    public void run() {
 
-        File eoeStopFile = new File(propertiesUtil.getEoeStopfile());
+        File stopFile = new File(propertiesUtil.getStopFile());
 
-        if (!eoeStopFile.exists()) {
+        if (!stopFile.exists()) {
 
-            processEoeFiles();
+            processDataFiles();
         } else {
-            log.with($ -> $.addMessage("Stop File exists ")).info(EligibilityLogStatus.PROCESSFAILURE);
-            String errorMessage = "eoe Stop File exists: " + eoeStopFile;
-            String stopFile = propertiesUtil.getEoeStopfile();
+            System.out.println("Stop File exists ");
+            String errorMessage = "eoe Stop File exists: " + stopFile;
+            String stopFileName = propertiesUtil.getStopFile();
             String subject = "eoe Stop File exists";
-            emailService.generateEmailRequest(stopFile, subject, errorMessage);
+            //emailService.generateEmailRequest(stopFileName, subject, errorMessage);
         }
     }
 
-    public void processEoeFiles() {
+    public void processDataFiles() {
         try {
-            File landingZoneDir = new File(propertiesUtil.getEoeInbound());
+            File landingZoneDir = new File(propertiesUtil.getInbound());
 
             if (landingZoneDir.exists() && landingZoneDir.isDirectory()) {
                 File[] trigFiles = landingZoneDir.listFiles(new TrigFileFilter());
@@ -79,60 +51,28 @@ public class Processor {
                             File dataFile = service.getDataFile(trigFile);
                             if (dataFile.exists()) {
 
-                                File dataTempFile = dataFile;
 
-                                String fileName = dataTempFile.getName();
-
-                                if (fileName.toUpperCase().startsWith("WF1")) {
-                                    dataTempFile = Utils.renameFile(dataTempFile);
-                                }
-//                              keyPath = Utils.genFileType(dataFile, propertiesUtil.getObjectFolder());
-                                sendFileToS3(dataTempFile);
-                                service.moveFile(dataTempFile, propertiesUtil.getEoeArchive());
-                                service.moveFile(trigFile, propertiesUtil.getEoeArchive());
-                                messagingService.sendOutstreamMessage(dataTempFile.getName(), FileType.INBOUND, propertiesUtil.getObjectFolder() + dataTempFile.getName());
-
-                                log.with($ -> $.addMessage("Processed EOE File : " + dataFile
-                                )).info(EligibilityLogStatus.COMPLETED);
+                                service.moveFile(dataFile, propertiesUtil.getArchive());
+                                service.moveFile(trigFile, propertiesUtil.getArchive());
+                                System.out.println("Processed EOE File : " + dataFile);
                             } else {
-                                log.with($ -> $.addMessage(String.format("dataFile does not exists for trig file %s moving trig to error directory", trigFile))).error(EligibilityLogStatus.PROCESSFAILURE);
+                                System.out.println(String.format("dataFile does not exists for trig file %s moving trig to error directory", trigFile));
                                 service.moveIncorrectFileToErrorDirectory(trigFile);
                             }
                         } else {
-                            log.with($ -> $.addMessage("EOE trig file no longer exists : " + trigFile.getAbsolutePath()
-                            )).info(EligibilityLogStatus.PROCESSFAILURE);
+                            System.out.println("EOE trig file no longer exists : " + trigFile.getAbsolutePath());
                         }
                     }
                 }
             } else {
-                log.with($ -> $.addMessage("EOE Directory no longer exists : " + propertiesUtil.getEoeInbound()
-                )).info(EligibilityLogStatus.PROCESSFAILURE);
-                String fileName = propertiesUtil.getEoeInbound();
+                System.out.println("EOE Directory no longer exists : " + propertiesUtil.getInbound());
+                String fileName = propertiesUtil.getInbound();
                 String subject = "EOE Directory no longer exists";
                 String emailMessage = "EOE Directory no longer exists " + fileName + " is not available";
-                emailService.generateEmailRequest(fileName, subject, emailMessage);
+                //emailService.generateEmailRequest(fileName, subject, emailMessage);
             }
-
         } catch (Exception ex) {
-            log.with($ -> $.addMessage("Exception in redistribute method ")).error(EligibilityLogStatus.PROCESSFAILURE, ex);
+            System.out.println("Exception in redistribute method ");
         }
-    }
-
-    public void sendFileToS3(File file) {
-        try {
-            String fileName = file.getName();
-
-            String key = propertiesUtil.getObjectFolder() + fileName;
-
-            PutObjectRequest putObjectRequest = new PutObjectRequest(propertiesUtil.getBucketName(), key, file);
-            amazonS3Client.putObject(putObjectRequest);
-
-            log.with($ -> $.addMessage("File has been loaded to S3 Bucket: " + file
-            )).info(EligibilityLogStatus.COMPLETED);
-        } catch (Exception ex) {
-            service.moveFile(file, propertiesUtil.getEoeError());
-            log.with($ -> $.addMessage("Exception in sendFileToS3 method,file has been moved to error directory ")).error(EligibilityLogStatus.PROCESSFAILURE, ex);
-        }
-
     }
 }

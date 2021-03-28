@@ -1,3 +1,5 @@
+package com.cold.storage.inbound.data.processor.utility;
+
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -5,75 +7,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class PropertiesUtil {
 
-    @Value("${bucketName}")
+    @Value("${inbound}")
     @Getter
-    public String bucketName;
+    private String inbound;
 
-    @Value("${objectFolder}")
+    @Value("${archive}")
     @Getter
-    public String objectFolder;
+    private String archive;
 
-    @Value("${EOEInbound}")
+    @Value("${stopFile}")
     @Getter
-    public String eoeInbound;
+    private String stopFile;
 
+    @Value("${errorPath}")
     @Getter
-    @Value("${EOEArchive}")
-    public String eoeArchive;
+    String errorPath;
 
+    @Value("${profile.api.url}")
     @Getter
-    @Value("${EOEError}")
-    public String eoeError;
+    private String baseUrl;
 
+    @Value("${spring.application.name}")
     @Getter
-    @Value("${eoeSTOP_FILE}")
-    private String eoeStopfile;
+    private String appName;
 
-    public String getEoeStopfile() {
-        return eoeStopfile;
-    }
-
-    public void setEoeStopfile(String eoeStopfile) {
-        this.eoeStopfile = eoeStopfile;
-    }
-
-    public String getBucketName() {
-        return bucketName;
-    }
-
-    public void setBucketName(String bucketName) {
-        this.bucketName = bucketName;
-    }
-
-    public void setObjectFolder(String objectFolder) {
-        this.objectFolder = objectFolder;
-    }
-
-    public String getObjectFolder() {
-        return objectFolder;
-    }
-    
-    public String getEoeInbound() {
-        return eoeInbound;
-    }
-
-    public void setEoeInbound(String eoeInbound) {
-        this.eoeInbound = eoeInbound;
-    }
-
-    public String getEoeArchive() {
-        return eoeArchive;
-    }
-
-    public void setEoeArchive(String eoeArchive) {
-        this.eoeArchive = eoeArchive;
-    }
-
-    public String getEoeError() {
-        return eoeError;
-    }
-
-    public void setEoeError(String eoeError) {
-        this.eoeError = eoeError;
-    }
+    @Value("${extension.file.trig}")
+    @Getter
+    private String trigFileExtension;
 }
