@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: inbound-data-processor
+inbound: src//test//resources//inbound
+archive: src//test//resources//rchive
+stopFile: src//test//resources//stop.1
+errorPath: src//test//resources//error
+process:
+  files: all
+extension:
+  file:
+    trig: .trig
+    lock: .lock
+    error: .err
+retry: 10

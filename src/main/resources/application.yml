@@ -3,15 +3,15 @@ server:
 spring:
   application:
     name: inbound-data-processor
-#inbound: /cold/storage/inbound
-#archive: /cold/storage/archive
-#stop: src/test/resources/stop.1
-#  dir:
-#process:
-#  files: all
-#extension:
-#  file:
-#    trig: .trig
-#    lock: .lock
-#    error: .err
-#retry: 10
+inbound: C:\\Users\\HP\\Desktop\\cold-storage\\data\\inbound\\
+archive: C:\\Users\\HP\\Desktop\\cold-storage\\data\\archive\\
+stopFile: C:\\sers\\HP\\Desktop\\cold-storage\\data\\stop.1
+errorPath:  C:\\Users\\HP\\Desktop\\cold-storage\\data\\error\\
+process:
+  files: all
+extension:
+  file:
+    trig: .trig
+    lock: .lock
+    error: .err
+retry: 10

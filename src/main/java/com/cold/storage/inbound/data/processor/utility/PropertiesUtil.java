@@ -23,9 +23,9 @@ public class PropertiesUtil {
     @Getter
     String errorPath;
 
-    @Value("${profile.api.url}")
+/*    @Value("${profile.api.url}")
     @Getter
-    private String baseUrl;
+    private String baseUrl;*/
 
     @Value("${spring.application.name}")
     @Getter

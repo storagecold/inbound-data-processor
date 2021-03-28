@@ -18,7 +18,7 @@ public class InboundRepoImpl implements InboundRepo {
     @Override
     public void loadAmad(Table table) {
         int count = 0;
-        List<Amad> amadList = new ArrayList<>(table.getRowCount());
+        List<Amad> amadList = new ArrayList(table.getRowCount());
 
         for (Map<String, Object> row : table) {
             Amad amad = new Amad();

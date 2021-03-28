@@ -1,40 +1,43 @@
 package com.cold.storage.inbound.data.processor.processor;
 
 import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
+import com.cold.storage.inbound.data.processor.service.MsAccessService;
 import com.cold.storage.inbound.data.processor.service.Service;
 import com.cold.storage.inbound.data.processor.utility.PropertiesUtil;
-import com.cold.storage.inbound.data.processor.utility.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Date;
 
 @Component
 public class Processor {
 
     @Autowired
-    PropertiesUtil propertiesUtil;
+    private PropertiesUtil propertiesUtil;
 
     @Autowired
     private Service service;
+
+    @Autowired
+    private MsAccessService msAccessService;
 
 /*    @Autowired
     EmailService emailService;*/
 
     @Scheduled(fixedDelay = 15000, initialDelay = 1000)
     public void run() {
-
+        System.out.println("application started=> " + new Date().toString());
         File stopFile = new File(propertiesUtil.getStopFile());
 
         if (!stopFile.exists()) {
-
             processDataFiles();
         } else {
             System.out.println("Stop File exists ");
-            String errorMessage = "eoe Stop File exists: " + stopFile;
+            String errorMessage = "Stop File exists: " + stopFile;
             String stopFileName = propertiesUtil.getStopFile();
-            String subject = "eoe Stop File exists";
+            String subject = "Stop File exists";
             //emailService.generateEmailRequest(stopFileName, subject, errorMessage);
         }
     }
@@ -50,25 +53,24 @@ public class Processor {
                         if (trigFile.exists()) {
                             File dataFile = service.getDataFile(trigFile);
                             if (dataFile.exists()) {
-
-
+                                msAccessService.readMsAccessFile(dataFile);
                                 service.moveFile(dataFile, propertiesUtil.getArchive());
                                 service.moveFile(trigFile, propertiesUtil.getArchive());
-                                System.out.println("Processed EOE File : " + dataFile);
+                                System.out.println("Processed cold storage File : " + dataFile);
                             } else {
                                 System.out.println(String.format("dataFile does not exists for trig file %s moving trig to error directory", trigFile));
                                 service.moveIncorrectFileToErrorDirectory(trigFile);
                             }
                         } else {
-                            System.out.println("EOE trig file no longer exists : " + trigFile.getAbsolutePath());
+                            System.out.println("cold data trig file no longer exists : " + trigFile.getAbsolutePath());
                         }
                     }
                 }
             } else {
-                System.out.println("EOE Directory no longer exists : " + propertiesUtil.getInbound());
+                System.out.println("cold data Directory no longer exists : " + propertiesUtil.getInbound());
                 String fileName = propertiesUtil.getInbound();
-                String subject = "EOE Directory no longer exists";
-                String emailMessage = "EOE Directory no longer exists " + fileName + " is not available";
+                String subject = "cold data Directory no longer exists";
+                String emailMessage = "cold data Directory no longer exists " + fileName + " is not available";
                 //emailService.generateEmailRequest(fileName, subject, emailMessage);
             }
         } catch (Exception ex) {
