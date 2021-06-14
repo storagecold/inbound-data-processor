@@ -1,8 +1,9 @@
 package com.cold.storage.inbound.data.processor.processor;
 
 import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
+import com.cold.storage.inbound.data.processor.service.FileService;
 import com.cold.storage.inbound.data.processor.service.MsAccessService;
-import com.cold.storage.inbound.data.processor.service.Service;
+import com.cold.storage.inbound.data.processor.service.ValidationServiceImpl;
 import com.cold.storage.inbound.data.processor.utility.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,10 +19,13 @@ public class Processor {
     private PropertiesUtil propertiesUtil;
 
     @Autowired
-    private Service service;
+    private FileService fileService;
 
     @Autowired
     private MsAccessService msAccessService;
+
+    @Autowired
+    private ValidationServiceImpl validationServiceImpl;
 
 /*    @Autowired
     EmailService emailService;*/
@@ -51,15 +55,24 @@ public class Processor {
                 if (trigFiles.length > 0) {
                     for (File trigFile : trigFiles) {
                         if (trigFile.exists()) {
-                            File dataFile = service.getDataFile(trigFile);
+                            File dataFile = fileService.getDataFile(trigFile);
                             if (dataFile.exists()) {
-                                msAccessService.readMsAccessFile(dataFile);
-                                service.moveFile(dataFile, propertiesUtil.getArchive());
-                                service.moveFile(trigFile, propertiesUtil.getArchive());
-                                System.out.println("Processed cold storage File : " + dataFile);
+                                boolean isValidFile = validationServiceImpl.validateFile(dataFile);
+                                if (isValidFile) {
+                                    System.out.println("start loading file: " + dataFile.getName());
+                                    msAccessService.readMsAccessFile(dataFile);
+                                    System.out.println("finished loading file: " + dataFile.getName());
+                                    fileService.moveFile(dataFile, propertiesUtil.getArchive());
+                                    fileService.moveFile(trigFile, propertiesUtil.getArchive());
+                                    System.out.println("Processed cold storage File : " + dataFile.getName());
+                                } else {
+                                    System.out.println("invalid file: " + dataFile.getName());
+                                    fileService.moveFile(trigFile, propertiesUtil.getErrorPath());
+                                    fileService.moveFile(dataFile, propertiesUtil.getErrorPath());
+                                }
                             } else {
                                 System.out.println(String.format("dataFile does not exists for trig file %s moving trig to error directory", trigFile));
-                                service.moveIncorrectFileToErrorDirectory(trigFile);
+                                fileService.moveFile(trigFile, propertiesUtil.getErrorPath());
                             }
                         } else {
                             System.out.println("cold data trig file no longer exists : " + trigFile.getAbsolutePath());
@@ -74,7 +87,7 @@ public class Processor {
                 //emailService.generateEmailRequest(fileName, subject, emailMessage);
             }
         } catch (Exception ex) {
-            System.out.println("Exception in redistribute method ");
+            System.out.println("Exception in processDataFiles method ");
         }
     }
 }

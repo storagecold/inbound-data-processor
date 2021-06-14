@@ -3,6 +3,13 @@ server:
 spring:
   application:
     name: inbound-data-processor
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mysqldb
+    username: root
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
 inbound: C:\\Users\\HP\\Desktop\\cold-storage\\data\\inbound\\
 archive: C:\\Users\\HP\\Desktop\\cold-storage\\data\\archive\\
 stopFile: C:\\sers\\HP\\Desktop\\cold-storage\\data\\stop.1

@@ -1,7 +1,10 @@
 package com.cold.storage.inbound.data.processor.service;
 
-import com.cold.storage.inbound.data.processor.repo.inbound.InboundRepo;
+import com.cold.storage.inbound.data.processor.repository.AmadRepo;
+import com.cold.storage.inbound.data.processor.repository.ColdInfoRepo;
+import com.cold.storage.inbound.data.processor.repository.FileDetailRepo;
 import com.cold.storage.inbound.data.processor.utility.Constants;
+import com.cold.storage.inbound.data.processor.utility.Utils;
 import com.healthmarketscience.jackcess.Database;
 import com.healthmarketscience.jackcess.Table;
 import org.slf4j.Logger;
@@ -15,31 +18,43 @@ import java.util.Set;
 
 @Service
 public class MsAccessServiceImpl implements MsAccessService {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final String FAILED_TO_READ_MSACCESS_DB = "failed to read msAccessDataBase %s: ";
 
     @Autowired
-    InboundRepo inboundRepo;
+    AmadRepo amadRepo;
+
+    @Autowired
+    ColdInfoRepo coldInfoRepo;
+
+    @Autowired
+    FileDetailRepo fileDetailRepo;
 
     @Override
     public void readMsAccessFile(File msAccessFile) {
         try {
+            //insert file processing detail.
+            fileDetailRepo.insertFileDetail(msAccessFile);
             Database database = Database.open(msAccessFile);
-            Table amadTable = database.getTable(Constants.AMADNO);
-            inboundRepo.loadAmad(amadTable);
+            Table amadTable = database.getTable(Constants.AMAD);
+            //load Amad Table
+            String SubmitterId = Utils.getSubmitter(msAccessFile);
+            int coldId = coldInfoRepo.getColdId(SubmitterId);
+            amadRepo.loadAmad(msAccessFile.getName(),coldId, amadTable);
         } catch (IOException ex) {
-            logger.error("failed to read msAccessDataBase %s: ", msAccessFile.getName());
+            log.error(String.format(FAILED_TO_READ_MSACCESS_DB, msAccessFile.getName()));
         }
     }
 
     @Override
     public Set<String> getAllTables(Database database) {
-        String dbName = "";
+        String dbName = Constants.EMPTY_STRING;
         Set<String> allTables = null;
         try {
             allTables = database.getTableNames();
             dbName = database.getDatabaseProperties().getName();
         } catch (IOException ex) {
-            logger.error("failed to read msAccessDataBase %s: ", dbName);
+            log.error(String.format(FAILED_TO_READ_MSACCESS_DB, dbName));
         }
         return allTables;
     }

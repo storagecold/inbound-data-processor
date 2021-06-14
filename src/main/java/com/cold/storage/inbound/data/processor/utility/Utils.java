@@ -6,6 +6,7 @@ import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -61,5 +62,16 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static String getSubmitter(File file) {
+        return file.getName().substring(0, file.getName().indexOf('.'));
+    }
+
+    public static int getYear(Object entryDate) {
+        Date date = (Date) entryDate;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
     }
 }

@@ -1,17 +1,28 @@
-server:
-  port: 8080
-spring:
-  application:
-    name: inbound-data-processor
-inbound: src//test//resources//inbound
-archive: src//test//resources//rchive
-stopFile: src//test//resources//stop.1
-errorPath: src//test//resources//error
-process:
-  files: all
-extension:
-  file:
-    trig: .trig
-    lock: .lock
-    error: .err
-retry: 10
+#server:
+#  port: 8080
+#spring:
+#  application:
+#    name: inbound-data-processor
+#  datasource:
+#    url:  jdbc:sqlserver://coldstoragedbserver.database.windows.net/coldstoragedb
+#    username: coldstorage
+#    password: T#osedays001
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  jpa:
+#    database: coldstoragedb
+#    show-sql: true
+#    hibernate:
+#      dialect: org.hibernate.dialect.SQLServer2012Dialect
+#      ddl-auto: create-drop
+#inbound: src//test//resources//inbound//
+#archive: src//test//resources//archive//
+#stopFile: src//test//resources//stop.1
+#errorPath: src//test//resources//error//
+#process:
+#  files: all
+#extension:
+#  file:
+#    trig: .trig
+#    lock: .lock
+#    error: .err
+#retry: 10
