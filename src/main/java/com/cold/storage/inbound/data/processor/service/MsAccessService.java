@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.Set;
 
 public interface MsAccessService {
-    void readMsAccessFile(File file);
+    void readMsAccessFile(File file) throws IOException;
 
-    Set<String> getAllTables(Database database) throws IOException;
+    Set<String> getTableNames(Database database);
 
 }

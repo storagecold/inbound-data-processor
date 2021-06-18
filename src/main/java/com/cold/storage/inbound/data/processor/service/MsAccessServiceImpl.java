@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 public class MsAccessServiceImpl implements MsAccessService {
     Logger log = LoggerFactory.getLogger(this.getClass());
-    private static final String FAILED_TO_READ_MSACCESS_DB = "failed to read msAccessDataBase %s: ";
+    private static final String FAILED_TO_READ_MSACCESS_DB = "failed to read msAccessDataBase %s: ,Ex: %s";
 
     @Autowired
     AmadRepo amadRepo;
@@ -31,23 +31,34 @@ public class MsAccessServiceImpl implements MsAccessService {
     FileDetailRepo fileDetailRepo;
 
     @Override
-    public void readMsAccessFile(File msAccessFile) {
+    public void readMsAccessFile(File msAccessFile) throws IOException {
+        Database database = null;
         try {
             //insert file processing detail.
             fileDetailRepo.insertFileDetail(msAccessFile);
-            Database database = Database.open(msAccessFile);
+            database = Database.open(msAccessFile);
             Table amadTable = database.getTable(Constants.AMAD);
+
             //load Amad Table
             String SubmitterId = Utils.getSubmitter(msAccessFile);
             int coldId = coldInfoRepo.getColdId(SubmitterId);
-            amadRepo.loadAmad(msAccessFile.getName(),coldId, amadTable);
+            //load grp
+            //load partyAcc
+
+            //load amad
+            amadRepo.loadAmad(msAccessFile.getName(), coldId, amadTable);
+
         } catch (IOException ex) {
             log.error(String.format(FAILED_TO_READ_MSACCESS_DB, msAccessFile.getName()));
+        } finally {
+            assert database != null;
+            //close db connection.
+            database.close();
         }
     }
 
     @Override
-    public Set<String> getAllTables(Database database) {
+    public Set<String> getTableNames(Database database) {
         String dbName = Constants.EMPTY_STRING;
         Set<String> allTables = null;
         try {
