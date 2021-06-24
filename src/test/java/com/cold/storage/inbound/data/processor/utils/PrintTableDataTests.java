@@ -1,4 +1,4 @@
-package com.cold.storage.inbound.data.processor.utility;
+package com.cold.storage.inbound.data.processor.utils;
 
 import com.cold.storage.inbound.data.processor.service.MsAccessService;
 import com.healthmarketscience.jackcess.Database;
@@ -36,7 +36,7 @@ public class PrintTableDataTests {
             Database database = null;
 
             //test run
-            String dataFile = "mohan.lodhirajcs.2018.1.mdb";
+            String dataFile = "lodhirajputic.202127031710.mdb";
             try {
                 File msAccessFile = new File(DATA_DIR + dataFile);
                 database = Database.open(msAccessFile);
@@ -55,6 +55,7 @@ public class PrintTableDataTests {
         Set<String> tables = msAccessService.getTableNames(database);
         for (String table : tables) {
             printTable(database, table);
+            //  System.out.println(table);
         }
     }
 
@@ -65,9 +66,8 @@ public class PrintTableDataTests {
         OutputStream outStream = new FileOutputStream(String.valueOf(targetFile));
 
         System.out.println("========== Printing data for Table | " + tableName + " |========================================");
-        String tableLine = "========== Printing data for Table | " + tableName + " |========================================";
-
-        outStream.write(tableLine.getBytes());
+        // String tableLine = "========== Printing data for Table | " + tableName + " |========================================";
+        //  outStream.write(tableLine.getBytes());
         for (Map<String, Object> row : database.getTable(tableName)) {
             String line = row.entrySet().toString();
             byte[] buffer = line.getBytes();

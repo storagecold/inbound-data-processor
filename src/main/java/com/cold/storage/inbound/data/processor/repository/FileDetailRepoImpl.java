@@ -1,7 +1,7 @@
 package com.cold.storage.inbound.data.processor.repository;
 
-import com.cold.storage.inbound.data.processor.utility.Constants;
-import com.cold.storage.inbound.data.processor.utility.Utils;
+import com.cold.storage.inbound.data.processor.utils.Constants;
+import com.cold.storage.inbound.data.processor.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;

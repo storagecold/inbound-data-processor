@@ -1,7 +1,7 @@
 package com.cold.storage.inbound.data.processor.repository;
 
 import com.cold.storage.inbound.data.processor.model.ColdInfo;
-import com.cold.storage.inbound.data.processor.utility.Constants;
+import com.cold.storage.inbound.data.processor.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

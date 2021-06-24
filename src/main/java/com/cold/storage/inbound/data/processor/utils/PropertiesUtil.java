@@ -1,4 +1,4 @@
-package com.cold.storage.inbound.data.processor.utility;
+package com.cold.storage.inbound.data.processor.utils;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

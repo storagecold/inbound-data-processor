@@ -1,6 +1,6 @@
 package com.cold.storage.inbound.data.processor.processor;
 
-import com.cold.storage.inbound.data.processor.utility.TestUtils;
+import com.cold.storage.inbound.data.processor.utils.TestUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

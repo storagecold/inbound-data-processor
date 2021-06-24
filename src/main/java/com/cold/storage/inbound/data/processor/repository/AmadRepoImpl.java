@@ -1,7 +1,7 @@
 package com.cold.storage.inbound.data.processor.repository;
 
-import com.cold.storage.inbound.data.processor.utility.Constants;
-import com.cold.storage.inbound.data.processor.utility.Utils;
+import com.cold.storage.inbound.data.processor.utils.Constants;
+import com.cold.storage.inbound.data.processor.utils.Utils;
 import com.healthmarketscience.jackcess.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

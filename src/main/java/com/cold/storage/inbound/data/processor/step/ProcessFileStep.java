@@ -1,10 +1,9 @@
 package com.cold.storage.inbound.data.processor.step;
 
-import com.cold.storage.inbound.data.processor.utility.PropertiesUtil;
+import com.cold.storage.inbound.data.processor.utils.PropertiesUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 
 import java.io.File;
 

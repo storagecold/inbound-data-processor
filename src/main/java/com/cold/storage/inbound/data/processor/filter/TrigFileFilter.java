@@ -1,6 +1,6 @@
 package com.cold.storage.inbound.data.processor.filter;
 
-import com.cold.storage.inbound.data.processor.utility.Constants;
+import com.cold.storage.inbound.data.processor.utils.Constants;
 
 import java.io.File;
 import java.io.FileFilter;

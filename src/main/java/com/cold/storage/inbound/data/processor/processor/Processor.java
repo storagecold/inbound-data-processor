@@ -4,7 +4,7 @@ import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
 import com.cold.storage.inbound.data.processor.service.FileService;
 import com.cold.storage.inbound.data.processor.service.MsAccessService;
 import com.cold.storage.inbound.data.processor.service.ValidationServiceImpl;
-import com.cold.storage.inbound.data.processor.utility.PropertiesUtil;
+import com.cold.storage.inbound.data.processor.utils.PropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

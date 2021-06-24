@@ -1,4 +1,4 @@
-package com.cold.storage.inbound.data.processor.utility;
+package com.cold.storage.inbound.data.processor.utils;
 
 import java.io.File;
 import java.io.IOException;

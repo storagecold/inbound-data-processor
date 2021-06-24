@@ -1,28 +1,24 @@
-#server:
-#  port: 8080
-#spring:
-#  application:
-#    name: inbound-data-processor
-#  datasource:
-#    url:  jdbc:sqlserver://coldstoragedbserver.database.windows.net/coldstoragedb
-#    username: coldstorage
-#    password: T#osedays001
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#  jpa:
-#    database: coldstoragedb
-#    show-sql: true
-#    hibernate:
-#      dialect: org.hibernate.dialect.SQLServer2012Dialect
-#      ddl-auto: create-drop
-#inbound: src//test//resources//inbound//
-#archive: src//test//resources//archive//
-#stopFile: src//test//resources//stop.1
-#errorPath: src//test//resources//error//
-#process:
-#  files: all
-#extension:
-#  file:
-#    trig: .trig
-#    lock: .lock
-#    error: .err
-#retry: 10
+server:
+  port: 8080
+spring:
+  application:
+    name: inbound-data-processor
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mysqldb
+    username: root
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+inbound: C:\\Users\\HP\\Desktop\\cold-storage\\data\\inbound\\
+archive: C:\\Users\\HP\\Desktop\\cold-storage\\data\\archive\\
+stopFile: C:\\sers\\HP\\Desktop\\cold-storage\\data\\stop.1
+errorPath: C:\\Users\\HP\\Desktop\\cold-storage\\data\\error\\
+process:
+  files: all
+extension:
+  file:
+    trig: .trig
+    lock: .lock
+    error: .err
+retry: 10
