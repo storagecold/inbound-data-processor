@@ -31,7 +31,7 @@ public class MsAccessServiceImpl implements MsAccessService {
     FileDetailRepo fileDetailRepo;
 
     @Override
-    public void readMsAccessFile(File msAccessFile) throws IOException {
+    public void readMsAccessDB(File msAccessFile) throws IOException {
         Database database = null;
         try {
             //insert file processing detail.

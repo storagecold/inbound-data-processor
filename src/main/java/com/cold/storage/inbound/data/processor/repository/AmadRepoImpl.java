@@ -27,7 +27,7 @@ public class AmadRepoImpl implements AmadRepo {
 
         for (Map<String, Object> row : table) {
             try {
-                Map params = new HashMap<>();
+                Map<String, Object> params = new HashMap<>();
                 params.put(Constants.COLD_ID, coldId);
                 params.put(Constants.AMADNO, row.get(Constants.AMADNO));
                 params.put(Constants.ENTRY, row.get(Constants.DATE));

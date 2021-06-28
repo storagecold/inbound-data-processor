@@ -60,7 +60,7 @@ public class Processor {
                                 boolean isValidFile = validationServiceImpl.validateFile(dataFile);
                                 if (isValidFile) {
                                     System.out.println("start loading file: " + dataFile.getName());
-                                    msAccessService.readMsAccessFile(dataFile);
+                                    msAccessService.readMsAccessDB(dataFile);
                                     System.out.println("finished loading file: " + dataFile.getName());
                                     fileService.moveFile(dataFile, propertiesUtil.getArchive());
                                     fileService.moveFile(trigFile, propertiesUtil.getArchive());
