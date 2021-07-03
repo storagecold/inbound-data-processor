@@ -51,4 +51,31 @@ public class Constants {
     public static final String MARK = "MARK";
     public static final String AMAD = "Amad";
 
+    //grp
+    public static final String GRP = "GRP";
+    public static final String DESCRIP = "descrip";
+    public static final String ADD1 = "add1";
+    public static final String UNDER = "under";
+    public static final String OPEN = "open";
+    public static final String DR = "dr";
+    public static final String CLOSE = "close";
+    public static final String BALANCE = "balance";
+    public static final String NATURE = "Nature";
+    public static final String OPENOTHER = "openOTHER";
+    public static final String ACC_NAME = "AccName";
+
+    //PartyAcc
+    public static final String PARTY_ACC = "PartyAcc";
+    public static final String CODE = "Code";
+    public static final String BANK_CODE = "BankCode";
+    public static final String BRANCH = "Branch";
+    public static final String ACC_NO = "AccNo";
+    public static final String IFSC = "IFSC";
+    public static final String CHQ1 = "Chq1";
+    public static final String CHQ2 = "Chq2";
+    public static final String CHQ3 = "Chq3";
+    public static final String BANK_NAME = "BankName";
+    public static final String WANT_2PRINT = "Want2Print";
+
+
 }

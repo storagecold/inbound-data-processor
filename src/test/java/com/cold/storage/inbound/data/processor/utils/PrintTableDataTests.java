@@ -55,7 +55,7 @@ public class PrintTableDataTests {
         Set<String> tables = msAccessService.getTableNames(database);
         for (String table : tables) {
             printTable(database, table);
-            //  System.out.println(table);
+            System.out.println(table);
         }
     }
 
@@ -66,13 +66,14 @@ public class PrintTableDataTests {
         OutputStream outStream = new FileOutputStream(String.valueOf(targetFile));
 
         System.out.println("========== Printing data for Table | " + tableName + " |========================================");
-        // String tableLine = "========== Printing data for Table | " + tableName + " |========================================";
-        //  outStream.write(tableLine.getBytes());
+        String tableLine = "========== Printing data for Table | " + tableName + " |========================================";
+        outStream.write(tableLine.getBytes());
         for (Map<String, Object> row : database.getTable(tableName)) {
             String line = row.entrySet().toString();
             byte[] buffer = line.getBytes();
             outStream.write(buffer);
             count++;
+
         }
         System.out.println("row present in table: " + tableName + " ==> " + count);
         outStream.close();
