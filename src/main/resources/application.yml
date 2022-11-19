@@ -4,9 +4,9 @@ spring:
   application:
     name: inbound-data-processor
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/mysqldb
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/cold
     username: root
-    password: password
+    password: root
   jpa:
     hibernate:
       ddl-auto: update

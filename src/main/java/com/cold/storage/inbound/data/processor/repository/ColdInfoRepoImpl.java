@@ -1,6 +1,6 @@
 package com.cold.storage.inbound.data.processor.repository;
 
-import com.cold.storage.inbound.data.processor.model.ColdInfo;
+import com.cold.storage.inbound.data.processor.processor.model.ColdInfo;
 import com.cold.storage.inbound.data.processor.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
