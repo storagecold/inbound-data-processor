@@ -10,6 +10,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  liquibase:
+    change-log: classpath:db\changelog\db.changelog-master.yaml
 inbound: C:\\Users\\HP\\Desktop\\cold-storage\\data\\inbound\\
 archive: C:\\Users\\HP\\Desktop\\cold-storage\\data\\archive\\
 stopFile: C:\\sers\\HP\\Desktop\\cold-storage\\data\\stop.1

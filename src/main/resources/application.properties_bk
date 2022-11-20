@@ -15,4 +15,3 @@
 #extension.file.lock:.lock
 #extension.file.error:.err
 #retry=10
-liquibase.change-log=classpath:db/changelog/db.changelog-master.yaml

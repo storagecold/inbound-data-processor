@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: CS-100-01
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "create cold_info table."
+      changes:
+        - createTable:
+            tableName: COLD_INFO
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+                    nullable: false
+              - column:
+                  name: COLD_SUBMITTER
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
