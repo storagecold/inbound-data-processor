@@ -96,17 +96,3 @@ databaseChangeLog:
                   defaultValue: now()
                   constraints:
                     nullable: false
-  - changeSet:
-      id: CS-100-07
-      author: Radha Mohan(radhamohan.rajput@gmail.com)
-      comment: "add primary key"
-      changes:
-        - addColumn:
-            tableName: COLD_INFO
-            columns:
-              - column:
-                  name: LAST_UPDATED
-                  type: DATETIME
-                  defaultValue: now()
-                  constraints:
-                    nullable: false
