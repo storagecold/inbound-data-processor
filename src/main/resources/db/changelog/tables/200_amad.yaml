@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: CS-200-01
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "create amad table."
+      changes:
+        - createTable:
+            tableName: AMAD
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AMADNO
+                  type: INT
+                  constraints:
+                    nullable: false
