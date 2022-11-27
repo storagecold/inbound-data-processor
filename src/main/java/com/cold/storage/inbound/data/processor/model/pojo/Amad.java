@@ -1,4 +1,4 @@
-package com.cold.storage.inbound.data.processor.processor.model;
+package com.cold.storage.inbound.data.processor.model.pojo;
 
 import lombok.Data;
 

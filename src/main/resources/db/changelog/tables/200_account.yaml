@@ -24,8 +24,8 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     primaryKeyName: PK_COLD_INFO
-                    foreignKeyName: FK_COLD_INFO
-                    references: COLD_INFO(COLD_ID)
+#                    foreignKeyName: FK_COLD_INFO
+#                    references: COLD_INFO(COLD_ID)
                     nullable: false
               - column:
                   name: ACCOUNT_NUMBER

@@ -34,7 +34,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: BankCode
                 type: INT
@@ -46,7 +46,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: Branch
                 type: VARCHAR(50)
@@ -58,7 +58,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: AccNo
                 type: BIGINT
@@ -70,7 +70,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: IFSC
                 type: VARCHAR(50)
@@ -82,7 +82,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: Chq1
                 type: VARCHAR(50)
@@ -94,7 +94,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: BankName
                 type: VARCHAR(50)
@@ -106,7 +106,7 @@ databaseChangeLog:
       comment: "add column"
       changes:
         - addColumn:
-            tableName: PartyAcc
+            tableName: BANK_DETAIL
             columns:
               - name: AccName
                 type: VARCHAR(50)
