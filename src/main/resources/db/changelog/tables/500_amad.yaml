@@ -1,5 +1,16 @@
 databaseChangeLog:
   - changeSet:
+      id: drop-AMAD-if-exists
+      author: the-author
+      comment: drop AMAD if exists
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: AMAD
+      changes:
+        - dropTable:
+            tableName: AMAD
+  - changeSet:
       id: CS-200-01
       author: Radha Mohan(radhamohan.rajput@gmail.com)
       comment: "create amad table."
@@ -90,7 +101,7 @@ databaseChangeLog:
               - name: COMM
                 type: VARCHAR(50)
                 constraints:
-                 nullable:false
+                  nullable:false
   - changeSet:
       id: CS-200-08
       author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
@@ -102,7 +113,7 @@ databaseChangeLog:
               - name: KISM
                 type: VARCHAR(50)
                 constraints:
-                 nullable:false
+                  nullable:false
   - changeSet:
       id: CS-200-09
       author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
@@ -114,7 +125,7 @@ databaseChangeLog:
               - name: MARK
                 type: VARCHAR(50)
                 constraints:
-                 nullable:false
+                  nullable:false
   - changeSet:
       id: CS-200-10
       author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
@@ -126,7 +137,7 @@ databaseChangeLog:
               - name: YEAR
                 type: INT
                 constraints:
-                 nullable:false
+                  nullable:false
 
   - changeSet:
       id: CS-200-11

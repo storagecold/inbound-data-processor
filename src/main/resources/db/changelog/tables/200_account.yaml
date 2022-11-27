@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop-ACCOUNT-if-exists
+      author: the-author
+      comment: drop ACCOUNT if exists
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: ACCOUNT
+      changes:
+        - dropTable:
+            tableName: ACCOUNT
+  - changeSet:
+      id: CS-500-01
+      author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
+      comment: "create File detail table"
+      changes:
+        - createTable:
+            tableName: ACCOUNT
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+                    foreignKeyName: FK_COLD_INFO
+                    references: COLD_INFO(COLD_ID)
+                    nullable: false
+              - column:
+                  name: ACCOUNT_NUMBER
+                  type: VARCHAR(50)
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+                    nullable: false
+              - column:
+                  name: code
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: party
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: add1
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: City
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ph
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: open
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dr
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cr
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: close
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: IntDate
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: Nature
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AccNo
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false

@@ -1,5 +1,16 @@
 databaseChangeLog:
   - changeSet:
+      id: drop-FILE_DETAIL-if-exists
+      author: the-author
+      comment: drop FILE_DETAIL if exists
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: FILE_DETAIL
+      changes:
+        - dropTable:
+            tableName: FILE_DETAIL
+  - changeSet:
       id: CS-400-01
       author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
       comment: "create File detail table"
@@ -13,10 +24,10 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                 name: FILE_NAME
-                 type: VARCHAR(50)
-                 constraints:
-                   nullable: false
+                  name: FILE_NAME
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
               - column:
                   name: COLD_SUBMITTER
                   type: VARCHAR(50)
