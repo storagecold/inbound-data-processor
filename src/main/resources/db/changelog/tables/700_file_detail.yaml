@@ -38,27 +38,14 @@ databaseChangeLog:
                   type: DATE
                   constraints:
                     nullable: false
-  - changeSet:
-      id: CS-400-02
-      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
-      comment: "add column"
-      changes:
-        - addColumn:
-            tableName: FILE_DETAIL
-            columns:
-              - name: COMEPLETED
-                type: DATETIME
-                constraints:
-                  nullable:false
-  - changeSet:
-      id: CS-400-03
-      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
-      comment: "add column"
-      changes:
-        - addColumn:
-            tableName: FILE_DETAIL
-            columns:
-              - name: STATUS
-                type: VARCHAR(50)
-                constraints:
-                  nullable:false
+              - column:
+                  name: COMEPLETED
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: STATUS
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+

@@ -1,22 +1,22 @@
 databaseChangeLog:
   - changeSet:
-      id: drop-BANK_DETAIL-if-exists
+      id: drop-AMAD-if-exists
       author: the-author
-      comment: drop BANK_DETAIL if exists
+      comment: drop AMAD_NIKASI if exists
       preConditions:
         - onFail: MARK_RAN
         - tableExists:
-            tableName: BANK_DETAIL
+            tableName: AMAD_NIKASI
       changes:
         - dropTable:
-            tableName: BANK_DETAIL
+            tableName: AMAD_NIKASI
   - changeSet:
-      id: CS-300-01
+      id: CS-200-01
       author: Radha Mohan(radhamohan.rajput@gmail.com)
-      comment: "create PartyAcc table."
+      comment: "create AMAD_NIKASI table."
       changes:
         - createTable:
-            tableName: BANK_DETAIL
+            tableName: AMAD_NIKASI
             columns:
               - column:
                   name: COLD_ID
@@ -24,33 +24,37 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: Branch
-                  type: VARCHAR(50)
+                  name: AMADNO
+                  type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: AccNo
-                  type: BIGINT
+                 name: AMAD_DATE
+                 type: Date
+                 constraints:
+                  nullable: false
+              - column:
+                 name: NIKASI_DATE
+                type: Date
+                constraints:
+                  nullable: false
+              - column:
+                  name: AMAD_MARKA
+                  type: vARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: IFSC
-                  type: VARCHAR(50)
+                  name: AMAD_PACKET
+                  type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: CHEQUE
-                  type: VARCHAR(50)
+                  name: NIKASI_PACKET
+                  type: INT
                   constraints:
                     nullable: false
               - column:
-                  name: BankName
+                  name: DELEVERED_TO
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
-              - column:
-                  name: AccName
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-
