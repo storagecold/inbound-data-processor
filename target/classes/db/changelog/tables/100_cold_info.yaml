@@ -1,0 +1,98 @@
+databaseChangeLog:
+  - changeSet:
+      id: CS-100-01
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "create cold_info table."
+      changes:
+        - createTable:
+            tableName: COLD_INFO
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+                    nullable: false
+              - column:
+                  name: COLD_SUBMITTER
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: CS-100-02
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: COLD_INFO
+            columns:
+              - column:
+                  name: COLD_NAME
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: CS-100-03
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: COLD_INFO
+            columns:
+              - column:
+                  name: ADDRESS_ID
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CONTACT_ID
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: OWNER_ID
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: FACEBOOK_URL
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: CS-100-04
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "load cold info"
+      changes:
+        - loadData:
+            file: db/changelog/data/cold_info.csv
+            separator: ","
+            tableName: COLD_INFO
+
+  - changeSet:
+      id: CS-100-05
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "update facebool urls"
+      changes:
+        - update:
+            columns:
+              - column:
+                  name: FACEBOOK_URL
+                  value: 'loadhirajput@faceboo.com'
+            tableName: COLD_INFO
+            where: COLD_ID = 1
+  - changeSet:
+      id: CS-100-06
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "add column LAST_UPDATED"
+      changes:
+        - addColumn:
+            tableName: COLD_INFO
+            columns:
+              - column:
+                  name: LAST_UPDATED
+                  type: DATETIME
+                  defaultValue: now()
+                  constraints:
+                    nullable: false

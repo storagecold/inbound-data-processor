@@ -1,0 +1,263 @@
+databaseChangeLog:
+  - changeSet:
+      id: CS-200-01
+      author: Radha Mohan(radhamohan.rajput@gmail.com)
+      comment: "create amad table."
+      changes:
+        - createTable:
+            tableName: AMAD
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: AMADNO
+                  type: INT
+                  constraints:
+                    autoincrement: true
+                    nullable: false
+  - changeSet:
+      id: CS-200-02
+      author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - column:
+                  name: PARTY
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: CS-200-03
+      author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - column:
+                  name: VILL
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: CS-200-04
+      author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: DISTT
+                type: VARCHAR(255)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-05
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: PKT1
+                type: INT
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-06
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: PACKETS
+                type: INT
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-07
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: COMM
+                type: VARCHAR(50)
+                constraints:
+                 nullable:false
+  - changeSet:
+      id: CS-200-08
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: KISM
+                type: VARCHAR(50)
+                constraints:
+                 nullable:false
+  - changeSet:
+      id: CS-200-09
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: MARK
+                type: VARCHAR(50)
+                constraints:
+                 nullable:false
+  - changeSet:
+      id: CS-200-10
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: YEAR
+                type: INT
+                constraints:
+                 nullable:false
+
+  - changeSet:
+      id: CS-200-11
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: Room
+                type: INT
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-12
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: PWT1
+                type: INT
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-13
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: AccNo
+                type: INT
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-14
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: LoadingCont
+                type: VARCHAR(50)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-15
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: mota
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-16
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: chatta
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-17
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: beej
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-18
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: mix
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-19
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: gulla
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-20
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: kirri
+                type: DECIMAL(15,2)
+                constraints:
+                  nullable:false
+  - changeSet:
+      id: CS-200-21
+      author: Pankaj KUmar(pankaj.rajput.iet@gmail.com)
+      comment: "add column"
+      changes:
+        - addColumn:
+            tableName: AMAD
+            columns:
+              - name: eWayBillDate
+                type: DATE
+                constraints:
+                  nullable:false
