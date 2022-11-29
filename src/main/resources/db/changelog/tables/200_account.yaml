@@ -11,7 +11,7 @@ databaseChangeLog:
         - dropTable:
             tableName: ACCOUNT
   - changeSet:
-      id: CS-500-01
+      id: CS-200-01
       author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
       comment: "create File detail table"
       changes:
@@ -29,83 +29,61 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: ACCOUNT_NUMBER
-                  type: VARCHAR(50)
+                  type: BIGINT
                   constraints:
                     primaryKey: true
                     primaryKeyName: PK_COLD_INFO
                     nullable: false
+
               - column:
-                  name: code
-                  type: DECIMAL(10,2)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: party
+                  name: ADDRESS
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: add1
+                  name: CITY
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: City
+                  name: PHONE
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACCOUNT_TYPE
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: OPENING_BALANCE
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: CLOSING_BALANCE
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: INTEREST_RATE
+                  type: DECIMAL(5,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EMAIL_ID
                   type: VARCHAR(50)
                   constraints:
                     nullable: false
               - column:
-                  name: ph
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: open
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: dr
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: cr
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: close
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: balance
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: rate
-                  type: INT
-                  constraints:
-                    nullable: false
-              - column:
-                  name: email
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: IntDate
+                  name: ENTRY_DATE
                   type: DATE
                   constraints:
                     nullable: false
+
               - column:
-                  name: Nature
-                  type: VARCHAR(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: AccNo
-                  type: VARCHAR(50)
+                  name: TRANSACTION_TYPE
+                  type: VARCHAR(15)
                   constraints:
                     nullable: false

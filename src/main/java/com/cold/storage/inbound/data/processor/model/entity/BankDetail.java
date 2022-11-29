@@ -1,3 +1,4 @@
+/*
 package com.cold.storage.inbound.data.processor.model.entity;
 
 import javax.persistence.Entity;
@@ -9,3 +10,4 @@ public class BankDetail {
 
 
 }
+*/

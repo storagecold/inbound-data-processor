@@ -1,0 +1,109 @@
+#databaseChangeLog:
+#  - changeSet:
+#      id: drop-AMAD-if-exists
+#      author: the-author
+#      comment: drop AMAD if exists
+#      preConditions:
+#        - onFail: MARK_RAN
+#        - tableExists:
+#            tableName: AMAD
+#      changes:
+#        - dropTable:
+#            tableName: AMAD
+#  - changeSet:
+#      id: CS-200-01
+#      author: Radha Mohan(radhamohan.rajput@gmail.com)
+#      comment: "create amad table."
+#      changes:
+#        - createTable:
+#            tableName: AMAD
+#            columns:
+#              - column:
+#                  name: COLD_ID
+#                  type: INT
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: AMADNO
+#                  type: INT
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: PARTY
+#                  type: VARCHAR(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: VILL
+#                  type: VARCHAR(255)
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: DISTT
+#                  type: VARCHAR(255)
+#                  constraints:
+#                    nullable: false
+#              -  column:
+#                  name: PACKETS
+#                  type: INT
+#                  constraints:
+#                    nullable: false
+#              - column:
+#                  name: COMM
+#                  type: VARCHAR(50)
+#                  constraints:
+#                    nullable: false
+#
+#              - column:
+#                  name: KISM
+#                  type: VARCHAR(50)
+#                  constraints:
+#                    nullable: false
+#
+#              - column:
+#                  name: MARKA
+#                  type: VARCHAR(50)
+#                  constraints:
+#                    nullable: false
+#
+#              - column:
+#                  name: YEAR
+#                  type: INT
+#                  constraints:
+#                    nullable: false
+#
+#              - column:
+#                 name: ROOM
+#                 type: INT
+#                 constraints:
+#                  nullable: false
+#
+#              - column:
+#                 name: WEIGHT
+#                 type: DECIMAL(15,2)
+#
+#              - column:
+#                 name: AccNo
+#                 type: INT
+#                 constraints:
+#                   nullable: false
+#
+#              - column:
+#                 name: CHATTA
+#                 type: INT
+#
+#              - column:
+#                 name: BEEJ
+#                 type: INT
+#
+#              - column:
+#                 name: MIX
+#                 type: INT
+#
+#              - column:
+#                 name: GULLA
+#                 type: INT
+#
+#              - column:
+#                 name: KIRRI
+#                 type: INT

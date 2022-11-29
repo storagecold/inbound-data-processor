@@ -1,3 +1,4 @@
+/*
 package com.cold.storage.inbound.data.processor.model.entity;
 
 import javax.persistence.Column;
@@ -26,3 +27,4 @@ public class Amad {
 
 
 }
+*/
