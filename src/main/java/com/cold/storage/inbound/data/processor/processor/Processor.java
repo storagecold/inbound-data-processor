@@ -1,6 +1,6 @@
 package com.cold.storage.inbound.data.processor.processor;
 
-import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
+import com.cold.storage.inbound.data.processor.model.filter.TrigFileFilter;
 import com.cold.storage.inbound.data.processor.service.FileService;
 import com.cold.storage.inbound.data.processor.service.MsAccessService;
 import com.cold.storage.inbound.data.processor.service.ValidationServiceImpl;

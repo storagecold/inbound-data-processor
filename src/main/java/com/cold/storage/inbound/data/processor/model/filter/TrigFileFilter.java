@@ -1,4 +1,4 @@
-package com.cold.storage.inbound.data.processor.filter;
+package com.cold.storage.inbound.data.processor.model.filter;
 
 import com.cold.storage.inbound.data.processor.utils.Constants;
 

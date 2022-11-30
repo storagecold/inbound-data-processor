@@ -1,5 +1,7 @@
 package com.cold.storage.inbound.data.processor.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ACCOUNT", schema = "COLD")
+@Data
 public class Account implements Serializable {
     @Id
     @Column(name = "COLD_ID")
