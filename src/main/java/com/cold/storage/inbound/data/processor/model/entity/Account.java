@@ -7,8 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "ACCOUNT", schema = "COLD")
@@ -38,13 +38,13 @@ public class Account implements Serializable {
     private String accountType;
 
     @Column(name = "OPENING_BALANCE")
-    private double openingBalance;
+    private BigDecimal openingBalance;
 
     @Column(name = "CLOSING_BALANCE")
-    private double closeBalance;
+    private BigDecimal closeBalance;
 
     @Column(name = "INTEREST_RATE")
-    private float interestRate;
+    private BigDecimal interestRate;
 
     @Column(name = "EMAIL_ID")
     private String emailId;
@@ -52,6 +52,9 @@ public class Account implements Serializable {
     @Column(name = "ENTRY_DATE")
     private LocalDate entryDate;
 
-    @Column(name="TRANSACTION_TYPE")
-    private String transactionType;
+    @Column(name = "DEBIT_AMOUNT")
+    private BigDecimal debitAmount;
+
+    @Column(name = "CREDIT_AMOUNT")
+    private BigDecimal creditAmount;
 }

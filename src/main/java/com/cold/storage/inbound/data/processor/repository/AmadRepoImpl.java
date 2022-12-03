@@ -1,21 +1,15 @@
 package com.cold.storage.inbound.data.processor.repository;
 
-import com.cold.storage.inbound.data.processor.model.entity.Account;
 import com.cold.storage.inbound.data.processor.model.entity.Amad;
 import com.cold.storage.inbound.data.processor.utils.Constants;
-import com.cold.storage.inbound.data.processor.utils.Utils;
 import com.healthmarketscience.jackcess.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.HashMap;
 import java.util.Map;
 
 @Repository

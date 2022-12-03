@@ -3,13 +3,15 @@ package com.cold.storage.inbound.data.processor.utils;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Component
 public class Constants implements Serializable {
     public static final String DOT_TRIG_EXT = ".trig";
+    public static final String EMPTY = "";
+    public static final BigDecimal BIG_DECIMAL_ZERO = new BigDecimal(0);
+    public static final LocalDate LOCAL_DATE_DEFAULT = LocalDate.now();
     public static final String MDB_EXT = "mdb";
     public static final String DOT = ".";
     public static final String MDB_TRIG_EXT = ".mdb.trig";
@@ -65,7 +67,7 @@ public class Constants implements Serializable {
     public static final String GRP = "GRP";
     public static final String CITY = "city";
     public static final String PHONE = "phone";
-    public static final String ACCOUNT_TYPE = "accountType";
+    public static final String ACCOUNT_TYPE = "Nature";
     public static final String DESCRIP = "descrip";
     public static final String ADDRESS = "add1";
     public static final String UNDER = "under";
@@ -77,11 +79,10 @@ public class Constants implements Serializable {
     public static final String OPENOTHER = "openOTHER";
     public static final String ACCOUNT_NAME = "AccName";
     public static final String ACCOUNT_NUMBER = "AccNo";
-    public static final float INTEREST_RATE = 0;
-    public static LocalDate ENTRY_DATE = LocalDate.now();
-    public static String TRANSACTION_TYPE = "transactionTYpe";
-
-
+    public static final String INTEREST_RATE = "rate";
+    public static String ENTRY_DATE = "IntDate";
+    public static String DEBIT_AMOUNT = "dr";
+    public static String CREDIT_AMOUNT = "cr";
     public static final String EMAIL_ID = "emailId";
     //PartyAcc
     public static final String PARTY_ACC = "PartyAcc";

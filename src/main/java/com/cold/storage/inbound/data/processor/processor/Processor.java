@@ -1,6 +1,6 @@
 package com.cold.storage.inbound.data.processor.processor;
 
-import com.cold.storage.inbound.data.processor.model.filter.TrigFileFilter;
+import com.cold.storage.inbound.data.processor.filter.TrigFileFilter;
 import com.cold.storage.inbound.data.processor.service.FileService;
 import com.cold.storage.inbound.data.processor.service.MsAccessService;
 import com.cold.storage.inbound.data.processor.service.ValidationServiceImpl;
@@ -35,14 +35,14 @@ public class Processor {
         System.out.println("application started=> " + new Date().toString());
         File stopFile = new File(propertiesUtil.getStopFile());
 
-        if (!stopFile.exists()) {
-            processDataFiles();
-        } else {
+        if (stopFile.exists()) {
             System.out.println("Stop File exists ");
             String errorMessage = "Stop File exists: " + stopFile;
             String stopFileName = propertiesUtil.getStopFile();
             String subject = "Stop File exists";
             //emailService.generateEmailRequest(stopFileName, subject, errorMessage);
+        } else {
+            processDataFiles();
         }
     }
 
