@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,6 +21,9 @@ public class Account implements Serializable {
     @Id
     @Column(name = "ACCOUNT_NUMBER")
     private long accountNumber;
+
+    @Column(name = "ACCOUNT_NAME")
+    private String accountName;
 
     @Column(name = "ADDRESS")
     private String  address;
@@ -46,7 +50,7 @@ public class Account implements Serializable {
     private String emailId;
 
     @Column(name = "ENTRY_DATE")
-    private Date entryDate;
+    private LocalDate entryDate;
 
     @Column(name="TRANSACTION_TYPE")
     private String transactionType;

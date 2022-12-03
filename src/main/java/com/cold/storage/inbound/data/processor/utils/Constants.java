@@ -2,14 +2,24 @@ package com.cold.storage.inbound.data.processor.utils;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Component
-public class Constants {
+public class Constants implements Serializable {
     public static final String DOT_TRIG_EXT = ".trig";
     public static final String MDB_EXT = "mdb";
     public static final String DOT = ".";
     public static final String MDB_TRIG_EXT = ".mdb.trig";
     public static final String EMPTY_STRING = "";
     public static final String INPROGRESS = "InProgress";
+    public static final String COMM = "comm";
+    public static final String ROOM = "room";
+    public static final String CHHATTA = "chhatta";
+    public static final String GULLA = "gulla";
+    public static final String KIRRI = "kirri";
 
     public static final class Header {
         public static final String CALLERAPP = "CALLERAPP";
@@ -19,7 +29,6 @@ public class Constants {
     public static final String MDB = "MDB";
     public static final String SUFFIX = "/";
     public static final String FILLER = ".";
-
 
 
     //File Detail
@@ -40,6 +49,7 @@ public class Constants {
     public static final String AMADNO = "AMADNO";
     public static final String ENTRY = "ENTRY";
     public static final String DATE = "DATE";
+
     public static final String PARTY = "PARTY";
     public static final String VILL = "VILL";
     public static final String PACKETS = "PACKETS";
@@ -53,17 +63,26 @@ public class Constants {
 
     //grp
     public static final String GRP = "GRP";
+    public static final String CITY = "city";
+    public static final String PHONE = "phone";
+    public static final String ACCOUNT_TYPE = "accountType";
     public static final String DESCRIP = "descrip";
-    public static final String ADD1 = "add1";
+    public static final String ADDRESS = "add1";
     public static final String UNDER = "under";
-    public static final String OPEN = "open";
+    public static final double OPENING_BALANCE = 0;
     public static final String DR = "dr";
-    public static final String CLOSE = "close";
+    public static final double CLOSING_BALANCE = 0;
     public static final String BALANCE = "balance";
     public static final String NATURE = "Nature";
     public static final String OPENOTHER = "openOTHER";
-    public static final String ACC_NAME = "AccName";
+    public static final String ACCOUNT_NAME = "AccName";
+    public static final String ACCOUNT_NUMBER = "AccNo";
+    public static final float INTEREST_RATE = 0;
+    public static LocalDate ENTRY_DATE = LocalDate.now();
+    public static String TRANSACTION_TYPE = "transactionTYpe";
 
+
+    public static final String EMAIL_ID = "emailId";
     //PartyAcc
     public static final String PARTY_ACC = "PartyAcc";
     public static final String CODE = "Code";

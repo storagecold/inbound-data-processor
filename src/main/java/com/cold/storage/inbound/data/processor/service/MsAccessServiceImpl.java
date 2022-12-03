@@ -19,8 +19,11 @@ public class MsAccessServiceImpl implements MsAccessService {
     Logger log = LoggerFactory.getLogger(this.getClass());
     private static final String FAILED_TO_READ_MSACCESS_DB = "failed to read msAccessDataBase %s: ,Ex: %s";
 
+//    @Autowired
+//    GrpRepo grpRepo;
+
     @Autowired
-    GrpRepo grpRepo;
+    AccountRepo accountRepo;
 
     @Autowired
     PartyAccRepo partyAccRepo;
@@ -42,7 +45,8 @@ public class MsAccessServiceImpl implements MsAccessService {
         Database database = null;
         try {
             //insert file processing detail.
-            fileDetailRepo.insertFileDetail(msAccessFile);
+            // TODO: need to look into this later
+//            fileDetailRepo.insertFileDetail(msAccessFile);
             database = Database.open(msAccessFile);
 
             String SubmitterId = Utils.getSubmitter(msAccessFile);
@@ -50,7 +54,7 @@ public class MsAccessServiceImpl implements MsAccessService {
 
             //load grp
             Table grpTable = database.getTable(Constants.GRP);
-            grpRepo.loadGrp(msAccessFile.getName(), coldId, grpTable);
+            accountRepo.loadAccount(msAccessFile.getName(), coldId, grpTable);
 
             //load partyAcc
             Table partyAccTable = database.getTable(Constants.PARTY_ACC);

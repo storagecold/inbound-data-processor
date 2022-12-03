@@ -34,6 +34,11 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: PK_COLD_INFO
                     nullable: false
+              - column:
+                  name: ACCOUNT_NAME
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
 
               - column:
                   name: ADDRESS

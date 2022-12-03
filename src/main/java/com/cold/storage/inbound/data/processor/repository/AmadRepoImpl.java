@@ -1,5 +1,7 @@
 package com.cold.storage.inbound.data.processor.repository;
 
+import com.cold.storage.inbound.data.processor.model.entity.Account;
+import com.cold.storage.inbound.data.processor.model.entity.Amad;
 import com.cold.storage.inbound.data.processor.utils.Constants;
 import com.cold.storage.inbound.data.processor.utils.Utils;
 import com.healthmarketscience.jackcess.Table;
@@ -9,45 +11,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.HashMap;
 import java.util.Map;
 
 @Repository
 public class AmadRepoImpl implements AmadRepo {
     Logger log = LoggerFactory.getLogger(this.getClass());
-    private static final String INSERT_AMAD_SQL = "INSERT INTO AMAD(COLD_ID,AMADNO,ENTRY,PARTY,VILL,PACKETS,KISM,YEAR,MARK) " +
-            "VALUES (:COLD_ID,:AMADNO,:ENTRY,:PARTY,:VILL,:PACKETS,:KISM,:YEAR,:MARK)" +
-            "ON DUPLICATE KEY UPDATE " +
-            "ENTRY=:ENTRY,PARTY=:PARTY,VILL=:VILL,PACKETS=:PACKETS,KISM=:KISM,MARK=:MARK";
-    @Autowired
-    private NamedParameterJdbcTemplate namedJdbcTemplate;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
+    @Transactional
     public void loadAmad(String name, int coldId, Table table) {
         int count = 0;
 
         for (Map<String, Object> row : table) {
             try {
-                Map<String, Object> params = new HashMap<>();
-                params.put(Constants.COLD_ID, coldId);
-                params.put(Constants.AMADNO, row.get(Constants.AMADNO));
-                params.put(Constants.ENTRY, row.get(Constants.DATE));
-                params.put(Constants.PARTY, row.get(Constants.PARTY).toString().trim());
-                params.put(Constants.VILL, row.get(Constants.VILL));
-                params.put(Constants.PACKETS, row.get(Constants.PKT3));
-                params.put(Constants.KISM, row.get(Constants.KISM));
-                params.put(Constants.YEAR, Utils.getYear(row.get(Constants.DATE)));
-                params.put(Constants.MARK, row.get(Constants.MARK1));
+                Amad amad = getAmad(coldId, row);
+                this.entityManager.persist(amad);
                 count++;
-                namedJdbcTemplate.update(INSERT_AMAD_SQL, params);
-            } catch (DataIntegrityViolationException ex) {
-                log.warn(String.format("DataIntegrityViolationException in Method loadAmad for file: %s , Record: %s , ex: %s", name, row.toString(), ex.getMessage()));
             } catch (Exception ex) {
-                log.warn(String.format("Exception in Method loadAmad for file: %s , Record: %s , ex: %s", name, row.toString(), ex.getMessage()));
+                log.warn(String.format("Exception in Method loadGrp for file: %s , Record: %s , ex: %s", name, row.toString(), ex.getMessage()));
             }
         }
-        log.info("Rows for Amad Table " + count);
+        log.info("Rows for Amad Table --> " + count);
     }
 
+    private Amad getAmad(int coldId, Map<String, Object> row) {
+        Amad amad = new Amad();
+        amad.setColdId(coldId);
+        amad.setAmadNo((Integer) row.get(Constants.AMADNO));
+        amad.setParty((String) row.get(Constants.PARTY));
+        amad.setVill((String) row.get(Constants.VILL));
+        amad.setDist((String) row.get(Constants.PACKETS));
+        amad.setComm((String) row.get(Constants.COMM));
+        amad.setKism((String) row.get(Constants.KISM));
+        amad.setMark((String) row.get(Constants.MARK));
+        amad.setYear((Integer) row.get(Constants.YEAR));
+        amad.setRoom((String) row.get(Constants.ROOM));
+        amad.setChhatta((Integer) row.get(Constants.CHHATTA));
+        amad.setGulla((Integer) row.get(Constants.GULLA));
+        amad.setKirri((Integer) row.get(Constants.KIRRI));
+        return amad;
+    }
 }

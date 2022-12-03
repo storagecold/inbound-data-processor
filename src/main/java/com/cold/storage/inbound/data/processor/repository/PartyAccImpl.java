@@ -53,7 +53,7 @@ public class PartyAccImpl implements PartyAccRepo {
         params.put(Constants.CHQ2, row.get(Constants.CHQ2));
         params.put(Constants.CHQ3, row.get(Constants.CHQ3));
         params.put(Constants.BANK_NAME, row.get(Constants.BANK_NAME));
-        params.put(Constants.ACC_NAME, row.get(Constants.ACC_NAME));
+        params.put(Constants.ACCOUNT_NAME, row.get(Constants.ACCOUNT_NAME));
         params.put(Constants.WANT_2PRINT, row.get(Constants.WANT_2PRINT));
 
         return params;
