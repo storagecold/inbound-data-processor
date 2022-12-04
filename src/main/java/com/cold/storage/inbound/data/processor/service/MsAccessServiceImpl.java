@@ -57,15 +57,15 @@ public class MsAccessServiceImpl implements MsAccessService {
             accountRepo.loadAccount(msAccessFile.getName(), coldId, grpTable);
 
             //load partyAcc
-            Table partyAccTable = database.getTable(Constants.PARTY_ACC);
-            partyAccRepo.loadPartyAcc(msAccessFile.getName(), coldId, partyAccTable);
+            //Table partyAccTable = database.getTable(Constants.PARTY_ACC);
+            //partyAccRepo.loadPartyAcc(msAccessFile.getName(), coldId, partyAccTable);
 
             //load Amad Table
-            Table amadTable = database.getTable(Constants.AMAD);
-            amadRepo.loadAmad(msAccessFile.getName(), coldId, amadTable);
+            //Table amadTable = database.getTable(Constants.AMAD);
+            //amadRepo.loadAmad(msAccessFile.getName(), coldId, amadTable);
 
             //load partyledger Table
-            Table partyLedgerTable = database.getTable(Constants.AMAD);
+            //Table partyLedgerTable = database.getTable(Constants.AMAD);
             //partyLedgerRepo.loadPartyLedger(msAccessFile.getName(), coldId, partyLedgerTable);
 
 
