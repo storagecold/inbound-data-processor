@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop-ACCOUNT-if-exists
+      author: the-author
+      comment: drop ACCOUNT if exists
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: ACCOUNT
+      changes:
+        - dropTable:
+            tableName: ACCOUNT
+  - changeSet:
+      id: CS-200-01
+      author: Pankaj Kumar(pankaj.rajput.iet@gmail.com)
+      comment: "create File detail table"
+      changes:
+        - createTable:
+            tableName: ACCOUNT
+            columns:
+              - column:
+                  name: COLD_ID
+                  type: INT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+#                    foreignKeyName: FK_COLD_INFO
+#                    references: COLD_INFO(COLD_ID)
+                    nullable: false
+              - column:
+                  name: ACCOUNT_NUMBER
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_COLD_INFO
+                    nullable: false
+              - column:
+                  name: ACCOUNT_NAME
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ADDRESS
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CITY
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PHONE
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACCOUNT_TYPE
+                  type: VARCHAR(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: OPENING_BALANCE
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CLOSING_BALANCE
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: INTEREST_RATE
+                  type: DECIMAL(5,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EMAIL_ID
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ENTRY_DATE
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DEBIT_AMOUNT
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CREDIT_AMOUNT
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
