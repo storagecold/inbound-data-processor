@@ -45,15 +45,15 @@ public class GrpRepoImpl implements GrpRepo {
         Map<String, Object> params = new HashMap<>();
         params.put(Constants.COLD_ID, coldId);
         params.put(Constants.DESCRIP, row.get(Constants.DESCRIP).toString().trim());
-        params.put(Constants.ADD1, row.get(Constants.ADD1));
+        params.put(Constants.ADDRESS, row.get(Constants.ADDRESS));
         params.put(Constants.UNDER, row.get(Constants.UNDER));
-        params.put(Constants.OPEN, row.get(Constants.OPEN));
-        params.put(Constants.DR, row.get(Constants.OPEN));
-        params.put(Constants.CLOSE, row.get(Constants.CLOSE));
+//        params.put(Constants.OPEN, row.get(Constants.OPEN));
+//        params.put(Constants.DR, row.get(Constants.OPEN));
+//        params.put(Constants.CLOSE, row.get(Constants.CLOSE));
         params.put(Constants.BALANCE, row.get(Constants.BALANCE));
         params.put(Constants.NATURE, row.get(Constants.NATURE));
         params.put(Constants.OPENOTHER, row.get(Constants.OPENOTHER));
-        params.put(Constants.ACC_NAME, row.get(Constants.ACC_NAME));
+        params.put(Constants.ACCOUNT_NAME, row.get(Constants.ACCOUNT_NAME));
 
         return params;
     }
